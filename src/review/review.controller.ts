@@ -14,6 +14,7 @@ import { ReviewDto } from './dto/review.dto';
 import { REVIEW_NOT_FOUND } from './review.constants';
 import { ReviewService } from './review.service';
 import { JwtGuard } from '../auth/guards/jwt.guard';
+import { UserEmail } from '../decorators/user-email.decorator';
 
 @Controller('review')
 export class ReviewController {
@@ -23,7 +24,8 @@ export class ReviewController {
 	@UseGuards(JwtGuard)
 	@UsePipes(new ValidationPipe())
 	@Post('create')
-	async create(@Body() dto: ReviewDto) {
+	async create(@Body() dto: ReviewDto, @UserEmail() email: string) {
+		console.log(email);
 		return this.reviewService.create(dto);
 	}
 
