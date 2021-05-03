@@ -24,8 +24,7 @@ export class ReviewController {
 	@UseGuards(JwtGuard)
 	@UsePipes(new ValidationPipe())
 	@Post('create')
-	async create(@Body() dto: ReviewDto, @UserEmail() email: string) {
-		console.log(email);
+	async create(@Body() dto: ReviewDto) {
 		return this.reviewService.create(dto);
 	}
 
